@@ -6,7 +6,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.utils import to_categorical
 
-from utils import plot_training_curves
+from cas_pratique_1_cnn.src.utils import plot_training_curves
 
 
 MODEL_PATH = "models/cnn_cifar10.keras"
