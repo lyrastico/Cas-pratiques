@@ -1,0 +1,15 @@
+.venv/
+*/.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Données téléchargées localement
+.keras/
+data/
+
+# Modèles générés
+models/*.keras
+
+# Résultats générés
+results/*.png
