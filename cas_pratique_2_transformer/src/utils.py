@@ -1,5 +1,3 @@
-"""Fonctions utiles pour le cas pratique 2."""
-
 import matplotlib.pyplot as plt
 
 

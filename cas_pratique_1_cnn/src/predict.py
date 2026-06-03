@@ -4,7 +4,7 @@ import numpy as np
 import tensorflow as tf
 from PIL import Image
 
-from cas_pratique_1_cnn.src.utils import CLASS_NAMES
+from utils import CLASS_NAMES
 
 
 MODEL_PATH = "models/cnn_cifar10.keras"

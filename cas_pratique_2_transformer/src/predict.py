@@ -1,5 +1,3 @@
-"""Prédiction de sentiment avec le modèle Transformer entraîné."""
-
 import re
 import sys
 from pathlib import Path

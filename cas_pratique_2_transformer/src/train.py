@@ -1,5 +1,3 @@
-"""Entraînement d'un modèle Transformer simple sur IMDB."""
-
 import os
 from pathlib import Path
 

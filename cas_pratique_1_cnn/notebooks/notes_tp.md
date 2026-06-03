@@ -77,7 +77,7 @@ Le modèle final obtient une accuracy de test de 70,45 %.
 Ce résultat est très proche du premier entraînement à 10 epochs, qui obtenait 70,28 %.  
 Cela montre qu'augmenter simplement le nombre d'epochs ne suffit pas forcément à améliorer fortement les performances.
 
-On observe aussi un début de surapprentissage : l'accuracy d'entraînement continue d'augmenter jusqu'à 82,35 %, tandis que l'accuracy de validation reste autour de 71 %.  
+On observe aussi un début de surapprentissage : l'accuracy d'entraînement continue d'augmenter jusqu'à 82,35 %, tandis que l'accuracy de validation reste autour de 71 %.
 L'EarlyStopping permet donc d'éviter de continuer un entraînement inutilement long.
 
 ![alt text](image-2.png)
