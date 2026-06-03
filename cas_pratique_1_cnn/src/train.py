@@ -6,7 +6,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.utils import to_categorical
 
-from cas_pratique_1_cnn.src.utils import plot_training_curves
+from utils import plot_training_curves
 
 
 MODEL_PATH = "models/cnn_cifar10.keras"
@@ -29,20 +29,45 @@ def load_data():
 
 
 def build_model():
-    """Construit un CNN simple pour classifier les images CIFAR-10."""
+    """Construit un CNN amélioré avec data augmentation pour classifier CIFAR-10."""
+
+    data_augmentation = tf.keras.Sequential([
+        layers.RandomFlip("horizontal"),
+        layers.RandomTranslation(0.05, 0.05),
+        layers.RandomZoom(0.05),
+    ])
+
     model = models.Sequential([
         layers.Input(shape=(32, 32, 3)),
 
-        layers.Conv2D(32, (3, 3), activation="relu"),
-        layers.MaxPooling2D((2, 2)),
+        data_augmentation,
 
-        layers.Conv2D(64, (3, 3), activation="relu"),
+        layers.Conv2D(32, (3, 3), padding="same", activation="relu"),
+        layers.BatchNormalization(),
+        layers.Conv2D(32, (3, 3), padding="same", activation="relu"),
+        layers.BatchNormalization(),
         layers.MaxPooling2D((2, 2)),
+        layers.Dropout(0.25),
 
-        layers.Conv2D(64, (3, 3), activation="relu"),
+        layers.Conv2D(64, (3, 3), padding="same", activation="relu"),
+        layers.BatchNormalization(),
+        layers.Conv2D(64, (3, 3), padding="same", activation="relu"),
+        layers.BatchNormalization(),
+        layers.MaxPooling2D((2, 2)),
+        layers.Dropout(0.25),
+
+        layers.Conv2D(128, (3, 3), padding="same", activation="relu"),
+        layers.BatchNormalization(),
+        layers.Conv2D(128, (3, 3), padding="same", activation="relu"),
+        layers.BatchNormalization(),
+        layers.MaxPooling2D((2, 2)),
+        layers.Dropout(0.35),
 
         layers.Flatten(),
-        layers.Dense(64, activation="relu"),
+        layers.Dense(128, activation="relu"),
+        layers.BatchNormalization(),
+        layers.Dropout(0.5),
+
         layers.Dense(10, activation="softmax"),
     ])
 
@@ -67,8 +92,8 @@ def main():
 
     early_stop = EarlyStopping(
         monitor="val_loss",
-        patience=5,
-        restore_best_weights=True
+        patience=8,
+        restore_best_weights=True,
     )
 
     print("\nDébut de l'entraînement...")
@@ -91,6 +116,7 @@ def main():
 
     print(f"\nModèle sauvegardé dans : {MODEL_PATH}")
     print(f"Courbes sauvegardées dans : {RESULTS_PATH}")
+
 
 if __name__ == "__main__":
     main()

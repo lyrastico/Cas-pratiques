@@ -81,3 +81,43 @@ On observe aussi un début de surapprentissage : l'accuracy d'entraînement cont
 L'EarlyStopping permet donc d'éviter de continuer un entraînement inutilement long.
 
 ![alt text](image-2.png)
+
+## Amélioration du modèle CNN
+
+Une version améliorée du CNN a été mise en place afin d'obtenir de meilleures performances.
+
+Cette version ajoute plusieurs éléments :
+
+- davantage de couches de convolution ;
+- des couches `BatchNormalization` ;
+- des couches `Dropout` ;
+- une data augmentation légère ;
+- un mécanisme d'`EarlyStopping`.
+
+La data augmentation applique automatiquement des transformations simples aux images d'entraînement, comme un retournement horizontal, un léger zoom et une légère translation.
+
+Les couches `BatchNormalization` permettent de stabiliser l'apprentissage.  
+Les couches `Dropout` permettent de limiter le surapprentissage.  
+L'architecture plus profonde permet d'extraire des caractéristiques visuelles plus complexes.
+
+Résultats obtenus avec le modèle amélioré :
+
+- Accuracy entraînement : 86,38 %
+- Loss entraînement : 0,3995
+- Accuracy validation : 84,01 %
+- Loss validation : 0,4818
+- Accuracy test : 85,14 %
+- Loss test : 0,4482
+
+Le modèle amélioré obtient donc environ 85,14 % de bonnes prédictions sur les données de test.
+
+Par rapport au modèle initial, qui obtenait environ 70,28 % d'accuracy test, cette nouvelle architecture apporte une amélioration importante. Elle permet de dépasser l'objectif de 80 % d'accuracy.
+
+## Comparaison des résultats
+
+| Version du modèle | Accuracy test |
+|---|---:|
+| CNN simple | 70,28 % |
+| CNN avec EarlyStopping | 70,45 % |
+| CNN avec data augmentation légère | 72,95 % |
+| CNN amélioré avec BatchNormalization, Dropout et data augmentation | 85,14 % |
